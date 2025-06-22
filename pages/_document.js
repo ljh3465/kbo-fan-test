@@ -14,7 +14,7 @@ export default function Document() {
         {/* Open Graph 설정 (네이버 & 소셜 미리보기용) */}
         <meta property="og:title" content="KBO 팬 성향 테스트 - 나와 어울리는 팀은?" />
         <meta property="og:description" content="10문제를 통해 당신의 프로야구 성향을 분석해 드립니다!" />
-        <meta property="og:image" content="https://kbo-fan-test.vercel.app/images/baseball-banner.png" />
+        <meta property="og:image" content="https://kbo-fan-test.vercel.app/og-image.png" />
         <meta property="og:url" content="https://kbo-fan-test.vercel.app" />
         <meta name="description" content="KBO 응원팀 성향 테스트로 당신과 어울리는 야구팀을 찾아보세요!" />
 
