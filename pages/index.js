@@ -9,7 +9,6 @@ export default function Home() {
   return (
     <>
       <Head>
-        {/* 메타 정보 */}
         <title>KBO 팬 성향 테스트</title>
         <meta name="description" content="당신의 야구 성향을 테스트하고 어울리는 KBO 구단을 찾아보세요!" />
         <meta property="og:title" content="KBO 팬 성향 테스트" />
@@ -19,6 +18,12 @@ export default function Home() {
       </Head>
 
       <div className="min-h-screen flex flex-col items-center justify-center bg-white text-center px-4 py-12">
+        {/* 헤더 문구 */}
+        <h1 className="text-4xl font-extrabold bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 text-transparent bg-clip-text mb-6">
+          나랑 잘 맞는 프로야구 구단은?
+        </h1>
+
+        {/* 이미지 */}
         <div className="max-w-md w-full mb-6">
           <Image
             src="/images/baseball-banner.png"
@@ -29,15 +34,20 @@ export default function Home() {
           />
         </div>
 
-        <h1 className="text-2xl font-bold mb-2">KBO 팬 성향 테스트</h1>
-        <p className="text-gray-700 mb-6">10문제를 통해 당신의 프로야구 구단을 찾아보세요</p>
+        {/* 설명 문구 */}
+        <p className="text-lg font-bold text-gray-800 mb-8">
+          10문제로 당신의 프로야구 구단을 찾아보세요
+        </p>
+
+        {/* CTA 버튼 */}
         <Link href="/quiz">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded shadow">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded shadow text-lg">
             테스트 시작
           </button>
         </Link>
       </div>
 
+      {/* 쿠팡 파트너스 광고 */}
       <div className="bg-white w-full flex justify-center items-center min-h-[160px]">
         <Script src="https://ads-partners.coupang.com/g.js" strategy="afterInteractive" />
         <Script id="coupang-home" strategy="afterInteractive">
