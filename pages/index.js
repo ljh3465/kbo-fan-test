@@ -1,42 +1,118 @@
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import AdBanner from "../components/AdBanner";
+import CoupangBanner from "../components/CoupangBanner";
 
-export default function Home() {
+const teamInfo = {
+  LG: {
+    name: "LG 트윈스",
+    description: "균형 잡힌 전통파 야구를 선호하는 당신, LG 트윈스와 닮았습니다!",
+    logo: "/logos/LG.png",
+  },
+  두산: {
+    name: "두산 베어스",
+    description: "꾸준함과 끈기의 상징, 당신은 두산 베어스 스타일!",
+    logo: "/logos/두산.png",
+  },
+  롯데: {
+    name: "롯데 자이언츠",
+    description: "열정과 낭만을 지닌 당신, 롯데 자이언츠 팬으로 제격입니다!",
+    logo: "/logos/롯데.png",
+  },
+  한화: {
+    name: "한화 이글스",
+    description: "끝까지 포기하지 않는 인내심, 한화 이글스와 닮은꼴!",
+    logo: "/logos/한화.png",
+  },
+  삼성: {
+    name: "삼성 라이온즈",
+    description: "강팀의 품격과 자존심, 삼성 라이온즈처럼 자신감 있는 스타일입니다!",
+    logo: "/logos/삼성.png",
+  },
+  SSG: {
+    name: "SSG 랜더스",
+    description: "새로운 시대의 흐름을 주도하는 당신, SSG 랜더스와 닮았습니다!",
+    logo: "/logos/SSG.png",
+  },
+  NC: {
+    name: "NC 다이노스",
+    description: "신흥강자다운 패기, NC 다이노스 스타일의 당신!",
+    logo: "/logos/NC.png",
+  },
+  키움: {
+    name: "키움 히어로즈",
+    description: "도전 정신과 성장 가능성을 지닌 당신은 키움 히어로즈 스타일!",
+    logo: "/logos/키움.png",
+  },
+  기아: {
+    name: "기아 타이거즈",
+    description: "역사와 전통을 중시하는 당신, 기아 타이거즈와 궁합이 잘 맞습니다!",
+    logo: "/logos/기아.png",
+  },
+  KT: {
+    name: "KT 위즈",
+    description: "새로움과 혁신을 추구하는 스타일, KT 위즈와 닮았어요!",
+    logo: "/logos/KT.png",
+  },
+};
+
+export default function ResultPage() {
+  const router = useRouter();
+  const { team } = router.query;
+  const info = teamInfo[team];
+
+  if (!info) return null;
+
+  const handleShare = () => {
+    const shareText = `나는 ${info.name} 스타일의 야구팬이래요! ⚾\n당신도 KBO 팬 테스트 해보세요!\nhttps://kbo-fan-test.vercel.app`;
+    if (navigator.share) {
+      navigator.share({
+        title: "KBO 팬 성향 테스트",
+        text: shareText,
+        url: "https://kbo-fan-test.vercel.app",
+      });
+    } else {
+      navigator.clipboard.writeText(shareText);
+      alert("공유 문구가 복사되었습니다.");
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white px-4 text-center">
-      <h1 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
-        나랑 잘 맞는 프로야구 구단은?
-      </h1>
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 bg-white text-center">
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">당신과 어울리는 팀은</h1>
+      <Image
+        src={info.logo}
+        alt={`${info.name} 로고`}
+        width={200}
+        height={200}
+        className="mb-6"
+      />
+      <h2 className="text-xl font-semibold text-gray-900 mb-2">{info.name}</h2>
+      <p className="text-gray-700 mb-6">{info.description}</p>
 
+      {/* 중간 광고 - 애드센스 */}
       <div className="my-6">
-        <Image
-          src="/images/baseball-banner.png"
-          alt="야구장 배경"
-          width={360}
-          height={240}
-          className="rounded-xl shadow"
-        />
-      </div>
-
-      <p className="text-gray-600 mb-6">
-        10문제를 통해 당신의 프로야구 구단을 찾으세요
-      </p>
-
-      {/* 기존 애드센스 광고 위치 */}
-      <div className="my-4">
         <AdBanner />
       </div>
 
-      <Link href="/quiz">
-        <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition">
-          테스트 시작
+      <div className="flex gap-4">
+        <Link href="/">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow">
+            다시 테스트하기
+          </button>
+        </Link>
+        <button
+          onClick={handleShare}
+          className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded shadow"
+        >
+          공유하기
         </button>
-      </Link>
+      </div>
 
-      {/* ✅ 쿠팡 배너 전용 하단 영역 */}
-      <div className="mt-10">
-        <AdBanner />
+      {/* 최하단 광고 - 쿠팡 파트너스 */}
+      <div className="mt-10 w-full">
+        <CoupangBanner />
       </div>
     </div>
   );
