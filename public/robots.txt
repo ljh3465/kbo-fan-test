@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kbo-fan-test.vercel.app
+
+# Sitemaps
+Sitemap: https://kbo-fan-test.vercel.app/sitemap.xml
