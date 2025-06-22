@@ -29,11 +29,11 @@ export default function QuizPage() {
   const question = questions[current];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-white text-black">
-      {/* 질문 박스 (가운데 고정) */}
-      <div className="flex-grow flex items-center justify-center px-4 py-10">
-        <div className="bg-white border border-gray-200 p-6 rounded-xl shadow-md max-w-md w-full text-center">
-          <h2 className="text-lg font-bold mb-4">
+    <div className="relative min-h-screen bg-white text-black">
+      {/* 중앙 콘텐츠 */}
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="bg-white p-6 rounded-lg shadow max-w-md w-full text-center">
+          <h2 className="text-lg font-semibold mb-4">
             Q{current + 1}. {question.text}
           </h2>
           <div className="space-y-3">
@@ -50,38 +50,36 @@ export default function QuizPage() {
         </div>
       </div>
 
-      {/* 구글 애드센스 (선택적으로 노출) */}
+      {/* 중간 광고: 문제 1, 6번일 때만 노출 */}
       {(current === 0 || current === 5) && (
-        <div className="my-4">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
           <AdBanner />
         </div>
       )}
 
-      {/* 쿠팡 파트너스 */}
-     {/* 쿠팡파트너스 광고 */}
-    <div className="w-full bg-white flex justify-center items-center min-h-[160px]">
+      {/* 하단 쿠팡파트너스 */}
+      <div className="absolute bottom-0 w-full">
         <Script
-            src="https://ads-partners.coupang.com/g.js"
-            strategy="afterInteractive"
+          src="https://ads-partners.coupang.com/g.js"
+          strategy="afterInteractive"
         />
         <Script id="coupang-bottom" strategy="afterInteractive">
-            {`
+          {`
             window.addEventListener("load", function () {
-                if (window.PartnersCoupang?.G) {
+              if (window.PartnersCoupang?.G) {
                 new window.PartnersCoupang.G({
-                    id: 880319,
-                    template: "carousel",
-                    trackingCode: "AF1664640",
-                    width: "680",
-                    height: "140",
-                    tsource: ""
+                  id: 880319,
+                  template: "carousel",
+                  trackingCode: "AF1664640",
+                  width: "100%",
+                  height: "140",
+                  tsource: ""
                 });
-                }
+              }
             });
-            `}
+          `}
         </Script>
-    </div>
-
+      </div>
     </div>
   );
 }
