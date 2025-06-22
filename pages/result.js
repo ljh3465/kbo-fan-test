@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import AdBanner from "../components/AdBanner";
+import Script from "next/script";
 
 const teamInfo = {
   LG: {
@@ -59,60 +59,81 @@ const teamInfo = {
 export default function ResultPage() {
   const router = useRouter();
   const { team } = router.query;
+
   const info = teamInfo[team];
 
-  if (!info) return null;
-
-  const handleShare = () => {
-    const shareText = `나는 ${info.name} 스타일의 야구팬이래요! ⚾\n당신도 KBO 팬 테스트 해보세요!\nhttps://kbo-fan-test.vercel.app`;
-    if (navigator.share) {
-      navigator.share({
-        title: "KBO 팬 성향 테스트",
-        text: shareText,
-        url: "https://kbo-fan-test.vercel.app",
-      });
-    } else {
-      navigator.clipboard.writeText(shareText);
-      alert("공유 문구가 복사되었습니다.");
-    }
-  };
+  if (!info) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <p className="text-gray-700">결과를 불러오는 중입니다...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 bg-white text-center">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">당신과 어울리는 팀은</h1>
-      <Image
-        src={info.logo}
-        alt={`${info.name} 로고`}
-        width={200}
-        height={200}
-        className="mb-6"
-      />
-      <h2 className="text-xl font-semibold text-gray-900 mb-2">{info.name}</h2>
-      <p className="text-gray-700 mb-6">{info.description}</p>
+    <>
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center text-center px-4 py-12">
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">당신과 어울리는 팀은</h1>
+        <Image
+          src={info.logo}
+          alt={`${info.name} 로고`}
+          width={200}
+          height={200}
+          className="mb-6"
+        />
+        <h2 className="text-xl font-semibold text-gray-900 mb-2">{info.name}</h2>
+        <p className="text-gray-700 mb-6">{info.description}</p>
 
-      {/* 메인 광고 */}
-      <div className="my-6">
-        <AdBanner />
-      </div>
-
-      <div className="flex gap-4">
-        <Link href="/">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow">
-            다시 테스트하기
+        <div className="flex gap-4">
+          <Link href="/">
+            <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow">
+              다시 테스트하기
+            </button>
+          </Link>
+          <button
+            onClick={() => {
+              const shareText = `나는 ${info.name} 스타일의 야구팬이래요! ⚾\n당신도 KBO 팬 테스트 해보세요!\nhttps://kbo-fan-test.vercel.app`;
+              if (navigator.share) {
+                navigator.share({
+                  title: "KBO 팬 성향 테스트",
+                  text: shareText,
+                  url: "https://kbo-fan-test.vercel.app",
+                });
+              } else {
+                navigator.clipboard.writeText(shareText);
+                alert("공유 문구가 복사되었습니다.");
+              }
+            }}
+            className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded shadow"
+          >
+            공유하기
           </button>
-        </Link>
-        <button
-          onClick={handleShare}
-          className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded shadow"
-        >
-          공유하기
-        </button>
+        </div>
       </div>
 
-      {/* ✅ 하단 쿠팡파트너스 광고 */}
-      <div className="mt-10">
-        <AdBanner />
+      {/* ✅ 쿠팡 파트너스 광고 */}
+      <div style={{ width: "100%" }}>
+        <Script
+          src="https://ads-partners.coupang.com/g.js"
+          strategy="afterInteractive"
+        />
+        <Script id="coupang-result" strategy="afterInteractive">
+          {`
+            window.addEventListener("load", function () {
+              if (window.PartnersCoupang && window.PartnersCoupang.G) {
+                new window.PartnersCoupang.G({
+                  id: 880319,
+                  template: "carousel",
+                  trackingCode: "AF1664640",
+                  width: "100%",
+                  height: "140",
+                  tsource: ""
+                });
+              }
+            });
+          `}
+        </Script>
       </div>
-    </div>
+    </>
   );
 }

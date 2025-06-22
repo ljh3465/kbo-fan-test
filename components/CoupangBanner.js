@@ -1,30 +1,28 @@
+// components/CoupangBanner.js
 import { useEffect, useRef } from "react";
 
 export default function CoupangBanner() {
-  const ref = useRef(null);
+  const ref = useRef();
 
   useEffect(() => {
-    if (!ref.current) return;
-
     const script = document.createElement("script");
     script.src = "https://ads-partners.coupang.com/g.js";
     script.async = true;
     script.onload = () => {
       if (window.PartnersCoupang) {
-        new window.PartnersCoupang.G({
+        window.PartnersCoupang.G({
           id: 880319,
           template: "carousel",
           trackingCode: "AF1664640",
+          width: "100%",
+          height: "140",
           tsource: "",
         });
       }
     };
+
     ref.current.appendChild(script);
   }, []);
 
-  return (
-    <div className="w-full overflow-hidden mt-8">
-      <div ref={ref} className="max-w-full mx-auto" />
-    </div>
-  );
+  return <div ref={ref} style={{ width: "100%" }} />;
 }
