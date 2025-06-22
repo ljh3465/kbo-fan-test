@@ -23,7 +23,7 @@ export default function Home() {
         10문제를 통해 당신의 프로야구 구단을 찾으세요
       </p>
 
-      {/* ✅ 애드센스 광고 삽입 */}
+      {/* 기존 애드센스 광고 위치 */}
       <div className="my-4">
         <AdBanner />
       </div>
@@ -33,6 +33,11 @@ export default function Home() {
           테스트 시작
         </button>
       </Link>
+
+      {/* ✅ 쿠팡 배너 전용 하단 영역 */}
+      <div className="mt-10">
+        <AdBanner />
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import AdBanner from "../components/AdBanner"; // 광고 컴포넌트 추가
+import AdBanner from "../components/AdBanner";
 
 const teamInfo = {
   LG: {
@@ -90,7 +90,7 @@ export default function ResultPage() {
       <h2 className="text-xl font-semibold text-gray-900 mb-2">{info.name}</h2>
       <p className="text-gray-700 mb-6">{info.description}</p>
 
-      {/* ✅ 광고 배너 삽입 */}
+      {/* 메인 광고 */}
       <div className="my-6">
         <AdBanner />
       </div>
@@ -107,6 +107,11 @@ export default function ResultPage() {
         >
           공유하기
         </button>
+      </div>
+
+      {/* ✅ 하단 쿠팡파트너스 광고 */}
+      <div className="mt-10">
+        <AdBanner />
       </div>
     </div>
   );
