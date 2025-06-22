@@ -8,7 +8,7 @@ export default function Document() {
     <Html lang="ko">
       <Head>
         <meta name="google-site-verification" content="oKc8NhzU3GBPPmzBASGFjbVPH7H4Dc4DEHZbPEq4vy8" />
-        
+        <meta name="naver-site-verification" content="7cbc4fbd24e6d3243551b2d8fb4905dbf8b9fda8" />
         {/* 애드센스 소유권 확인용 코드 삽입 */}
         <script
           async
