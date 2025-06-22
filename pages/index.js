@@ -1,25 +1,32 @@
-// pages/index.js
-
-import { useRouter } from "next/router";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
-  const router = useRouter();
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4 text-center">
-      {/* 브랜딩 이름 */}
-      <div className="absolute top-4 left-4 text-lg font-bold cursor-pointer" onClick={() => router.push("/")}>음파대파쪽파</div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white px-4 text-center">
+      <h1 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">
+        나랑 잘 맞는 프로야구 구단은?
+      </h1>
 
-      {/* 테스트 이름 */}
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">KBO 성향 테스트</h1>
-      <p className="text-gray-700 mb-6">10문제를 통해 당신의 KBO 응원팀을 찾아보세요</p>
+      <div className="my-6">
+        <Image
+          src="/images/baseball-banner.png"
+          alt="야구장 배경"
+          width={500}
+          height={400}
+          className="rounded-xl shadow"
+        />
+      </div>
 
-      <button
-        onClick={() => router.push("/quiz")}
-        className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-lg text-lg shadow"
-      >
-        테스트 시작
-      </button>
+      <p className="text-gray-600 mb-8">
+        10문제를 통해 당신의 프로야구 구단을 찾으세요
+      </p>
+
+      <Link href="/quiz">
+        <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition">
+          테스트 시작
+        </button>
+      </Link>
     </div>
   );
 }
