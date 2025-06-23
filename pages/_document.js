@@ -6,6 +6,9 @@ export default function Document() {
   return (
     <Html lang="ko">
       <Head>
+        {/* 파비콘 */}
+        <link rel="icon" href="/favicon.ico" />
+
         {/* 구글 사이트 소유권 확인 */}
         <meta name="google-site-verification" content="oKc8NhzU3GBPPmzBASGFjbVPH7H4Dc4DEHZbPEq4vy8" />
         {/* 네이버 사이트 소유권 확인 */}
